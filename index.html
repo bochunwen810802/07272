@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能家居仪表板</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="sidebar">
+            <div class="logo">
+                <h2>智能家居</h2>
+                <p>控制中心</p>
+            </div>
+            <div class="user-profile">
+                <div class="avatar">
+                    <img src="https://via.placeholder.com/50" alt="用户头像">
+                </div>
+                <div class="user-info">
+                    <h3>欢迎回来！</h3>
+                    <p>用户名</p>
+                </div>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li class="active"><span class="icon">📊</span> 仪表板</li>
+                    <li><span class="icon">🏠</span> 房间</li>
+                    <li><span class="icon">⚙️</span> 设置</li>
+                    <li><span class="icon">📱</span> 设备</li>
+                    <li><span class="icon">📈</span> 统计</li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="header">
+                <h1>智能家居仪表板</h1>
+                <div class="date-time">
+                    <span id="current-date"></span>
+                    <span id="current-time"></span>
+                </div>
+            </div>
+            <div class="content-grid">
+                <!-- 设备状态卡片 -->
+                <div class="card device-status">
+                    <h2>设备状态</h2>
+                    <div class="devices-grid">
+                        <div class="device" data-device="aircon">
+                            <div class="device-icon">❄️</div>
+                            <div class="device-info">
+                                <h3>空调</h3>
+                                <p class="status on">开启</p>
+                            </div>
+                            <div class="radio-input">
+                                <input type="radio" id="aircon-radio" name="device-select" value="aircon" checked>
+                                <label for="aircon-radio"></label>
+                            </div>
+                        </div>
+                        <div class="device" data-device="light">
+                            <div class="device-icon">💡</div>
+                            <div class="device-info">
+                                <h3>灯光</h3>
+                                <p class="status off">关闭</p>
+                            </div>
+                            <div class="radio-input">
+                                <input type="radio" id="light-radio" name="device-select" value="light">
+                                <label for="light-radio"></label>
+                            </div>
+                        </div>
+                        <div class="device" data-device="tv">
+                            <div class="device-icon">📺</div>
+                            <div class="device-info">
+                                <h3>电视</h3>
+                                <p class="status on">开启</p>
+                            </div>
+                            <div class="radio-input">
+                                <input type="radio" id="tv-radio" name="device-select" value="tv">
+                                <label for="tv-radio"></label>
+                            </div>
+                        </div>
+                        <div class="device" data-device="fridge">
+                            <div class="device-icon">🧊</div>
+                            <div class="device-info">
+                                <h3>冰箱</h3>
+                                <p class="status on">开启</p>
+                            </div>
+                            <div class="radio-input">
+                                <input type="radio" id="fridge-radio" name="device-select" value="fridge">
+                                <label for="fridge-radio"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 用电量统计 -->
+                <div class="card power-consumption">
+                    <h2>设备用电量统计</h2>
+                    <div class="period-toggle">
+                        <button id="weekly" class="active">本周</button>
+                        <button id="monthly">本月</button>
+                    </div>
+                    <div id="power-chart"></div>
+                </div>
+                
+                <!-- 高峰用电时段 -->
+                <div class="card peak-hours">
+                    <h2>一天中最高用电时段</h2>
+                    <div id="peak-hours-chart"></div>
+                </div>
+                
+                <!-- 耗电量最高设备 -->
+                <div class="card top-consumer">
+                    <h2>耗电量最高的家电</h2>
+                    <div class="top-consumer-content">
+                        <div id="top-consumer-chart"></div>
+                        <div class="top-consumer-details">
+                            <div class="top-device">
+                                <div class="device-icon">❄️</div>
+                                <div class="device-info">
+                                    <h3>空调</h3>
+                                    <p>当前功率: <span class="power-value">1200W</span></p>
+                                </div>
+                            </div>
+                            <div class="power-percentage">
+                                <div class="progress-ring">
+                                    <svg width="120" height="120">
+                                        <circle class="progress-ring-circle-bg" cx="60" cy="60" r="50"></circle>
+                                        <circle class="progress-ring-circle" cx="60" cy="60" r="50" id="top-consumer-circle"></circle>
+                                        <text x="60" y="65" text-anchor="middle" class="percentage-text">45%</text>
+                                    </svg>
+                                </div>
+                                <p>占总用电量的百分比</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
