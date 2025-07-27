@@ -259,9 +259,10 @@ function createPowerChart(period) {
     const categories = data.map(item => item.day);
     const values = data.map(item => item.value);
     
-    Highcharts.chart('power-chart', {
+    // 图表配置
+    const chartConfig = {
         chart: {
-            type: 'spline',
+            type: 'areaspline',
             backgroundColor: 'transparent',
             style: {
                 fontFamily: "'Segoe UI', 'Microsoft YaHei', sans-serif"
@@ -314,17 +315,49 @@ function createPowerChart(period) {
         credits: {
             enabled: false
         },
+        plotOptions: {
+            areaspline: {
+                fillOpacity: 0.3,
+                marker: {
+                    enabled: true,
+                    radius: 5,
+                    symbol: 'circle'
+                },
+                lineWidth: 3
+            }
+        },
         series: [{
             name: '用电量',
             data: values,
             color: '#00c6ff',
+            fillColor: {
+                linearGradient: {
+                    x1: 0,
+                    y1: 0,
+                    x2: 0,
+                    y2: 1
+                },
+                stops: [
+                    [0, 'rgba(0, 198, 255, 0.5)'],
+                    [1, 'rgba(0, 198, 255, 0.05)']
+                ]
+            },
             marker: {
-                symbol: 'circle',
-                radius: 5,
-                fillColor: '#00c6ff'
+                fillColor: '#00c6ff',
+                lineColor: '#00c6ff',
+                lineWidth: 2
             }
         }]
-    });
+    };
+    
+    // 为月度图表添加更多配置
+    if (period === 'monthly') {
+        chartConfig.plotOptions.areaspline.pointStart = 1;
+        chartConfig.plotOptions.areaspline.pointInterval = 1;
+        chartConfig.xAxis.tickInterval = 1;
+    }
+    
+    Highcharts.chart('power-chart', chartConfig);
 }
 
 // 创建一天中最高用电时段图表

@@ -327,7 +327,22 @@ body {
 }
 
 #power-chart {
-    height: 250px;
+    height: 280px;
+    margin-top: 15px;
+    position: relative;
+}
+
+/* 自定义图表样式 */
+.highcharts-point {
+    stroke-width: 2px;
+}
+
+.highcharts-area {
+    fill-opacity: 0.5;
+}
+
+.highcharts-grid-line {
+    stroke-dasharray: 2, 2;
 }
 
 /* 高峰用电时段 */
